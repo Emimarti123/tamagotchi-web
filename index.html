@@ -1,120 +1,120 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tamagotchi Web</title>
+  <title>Pibble babysitterJ</title>
   <link rel="stylesheet" href="css/styles.css">
-
+ 
   <script src="js/app.js" defer></script>
 </head>
-<body class="dia">
+<body class="day">
 
-  <main class="contenedor">
+  <main class="container">
 
-    <!--  PANTALLA 1: CREACIÓN DE LA MASCOTA  -->
-    <section id="pantalla-inicio" class="pantalla">
+    <!-- ============ SCREEN 1: MASCOT CREATION ============ -->
+    <section id="screen-start" class="screen">
       <h1>Web Mascot</h1>
-      <p class="subtitulo">Choose your virtual mascot and take care of it for a full day.</p>
+      <p class="subtitle">Choose your virtual mascot and take care of it for a full day.</p>
 
-      <form id="form-inicio">
-        <fieldset class="opciones-mascota">
+      <form id="start-form">
+        <fieldset class="pet-options">
           <legend>1. Choose your mascot</legend>
 
-          <label class="opcion">
-            <input type="radio" name="dificultad" value="facil">
-            <span class="opcion-visual" data-mascota="facil">🐣</span>
-            <span class="opcion-nombre">Fácil</span>
-            <span class="opcion-detalle">Come cada 6 h</span>
+          <label class="option">
+            <input type="radio" name="difficulty" value="easy">
+            <span class="option-visual" data-pet="easy">🐣</span>
+            <span class="option-name">Easy</span>
+            <span class="option-detail">Eats every 6 h</span>
           </label>
 
-          <label class="opcion">
-            <input type="radio" name="dificultad" value="medio">
-            <span class="opcion-visual" data-mascota="medio">🐱</span>
-            <span class="opcion-nombre">Medio</span>
-            <span class="opcion-detalle">Come cada 4 h</span>
+          <label class="option">
+            <input type="radio" name="difficulty" value="medium">
+            <span class="option-visual" data-pet="medium">🐱</span>
+            <span class="option-name">Medium</span>
+            <span class="option-detail">Eats every 4 h</span>
           </label>
 
-          <label class="opcion">
-            <input type="radio" name="dificultad" value="dificil">
-            <span class="opcion-visual" data-mascota="dificil">🐲</span>
-            <span class="opcion-nombre">Difícil</span>
-            <span class="opcion-detalle">Come cada 3 h</span>
+          <label class="option">
+            <input type="radio" name="difficulty" value="hard">
+            <span class="option-visual" data-pet="hard">🐲</span>
+            <span class="option-name">Hard</span>
+            <span class="option-detail">Eats every 3 h</span>
           </label>
         </fieldset>
 
-        <label for="input-nombre" class="etiqueta">2. Ponle un nombre</label>
-        <input type="text" id="input-nombre" maxlength="15" placeholder="Ej. Pixel" autocomplete="off">
+        <label for="input-name" class="label">2. Give it a name</label>
+        <input type="text" id="input-name" maxlength="15" placeholder="e.g. Pixel" autocomplete="off">
 
-        <p id="error-inicio" class="error"></p>
-        <button type="submit" class="btn btn-principal">Comenzar</button>
+        <p id="start-error" class="error"></p>
+        <button type="submit" class="btn btn-primary">Start</button>
       </form>
     </section>
 
-    <!-- ============ PANTALLA 2: JUEGO ============ -->
-    <section id="pantalla-juego" class="pantalla oculta">
-      <header class="barra-superior">
+    <!-- ============ SCREEN 2: GAME ============ -->
+    <section id="screen-game" class="screen hidden">
+      <header class="top-bar">
         <div>
-          <h2 id="nombre-mascota">Nombre</h2>
-          <span id="dificultad-mascota" class="etiqueta-dificultad">Fácil</span>
+          <h2 id="pet-name">Name</h2>
+          <span id="pet-difficulty" class="difficulty-tag">Easy</span>
         </div>
-        <div class="reloj-contenedor">
-          <span id="icono-momento">☀️</span>
-          <span id="reloj">08:00</span>
-          <small id="tiempo-restante">Quedan 24 h</small>
+        <div class="clock-container">
+          <span id="time-icon">☀️</span>
+          <span id="clock">08:00</span>
+          <small id="time-left">24 h left</small>
         </div>
       </header>
 
-      <div class="progreso-dia">
-        <div id="barra-dia" class="progreso-dia-relleno"></div>
+      <div class="day-progress">
+        <div id="day-bar" class="day-progress-fill"></div>
       </div>
 
-      <div id="escenario" class="escenario">
-        <div id="mascota-visual" class="mascota">🐣</div>
+      <div id="stage" class="stage">
+        <div id="pet-visual" class="pet">🐣</div>
       </div>
 
-      <p id="mensaje" class="mensaje">¡Hola! Cuídame bien.</p>
+      <p id="message" class="message">Hi, im your pibble, Please take good care of me.</p>
 
-      <div class="indicadores">
-        <div class="indicador">
-          <span class="indicador-nombre">🍖 Hambre</span>
-          <div class="barra"><div id="barra-hambre" class="barra-relleno"></div></div>
-          <span id="valor-hambre" class="indicador-valor">0%</span>
+      <div class="indicators">
+        <div class="indicator">
+          <span class="indicator-name">🍖 Hunger</span>
+          <div class="bar"><div id="bar-hunger" class="bar-fill"></div></div>
+          <span id="value-hunger" class="indicator-value">0%</span>
         </div>
-        <div class="indicador">
-          <span class="indicador-nombre">🎾 Diversión</span>
-          <div class="barra"><div id="barra-diversion" class="barra-relleno"></div></div>
-          <span id="valor-diversion" class="indicador-valor">100%</span>
+        <div class="indicator">
+          <span class="indicator-name">🎾 Fun</span>
+          <div class="bar"><div id="bar-fun" class="bar-fill"></div></div>
+          <span id="value-fun" class="indicator-value">100%</span>
         </div>
-        <div class="indicador">
-          <span class="indicador-nombre">🧼 Higiene</span>
-          <div class="barra"><div id="barra-higiene" class="barra-relleno"></div></div>
-          <span id="valor-higiene" class="indicador-valor">100%</span>
+        <div class="indicator">
+          <span class="indicator-name">🧼 Hygiene</span>
+          <div class="bar"><div id="bar-hygiene" class="bar-fill"></div></div>
+          <span id="value-hygiene" class="indicator-value">100%</span>
         </div>
       </div>
 
-      <div class="acciones">
-        <button id="btn-alimentar" class="btn">🍖 Alimentar</button>
-        <button id="btn-jugar" class="btn">🎾 Jugar</button>
-        <button id="btn-bano" class="btn">🚽 Baño</button>
+      <div class="actions">
+        <button id="btn-feed" class="btn">🍖 Feed</button>
+        <button id="btn-play" class="btn">🎾 Play</button>
+        <button id="btn-bath" class="btn">🚽 Bathroom</button>
       </div>
-      <button id="btn-pausa" class="btn btn-secundario">⏸ Pausar</button>
+      <button id="btn-pause" class="btn btn-secondary">⏸ Pause</button>
     </section>
 
-    <!-- ============ PANTALLA 3: GAME OVER ============ -->
-    <section id="pantalla-gameover" class="pantalla oculta">
-      <div class="mascota fantasma">👻</div>
+    <!-- ============ SCREEN 3: GAME OVER ============ -->
+    <section id="screen-gameover" class="screen hidden">
+      <div class="pet ghost">👻</div>
       <h2>Game Over</h2>
-      <p id="motivo-gameover" class="mensaje"></p>
-      <button id="btn-reiniciar-gameover" class="btn btn-principal">Jugar de nuevo</button>
+      <p id="gameover-reason" class="message"></p>
+      <button id="btn-restart-gameover" class="btn btn-primary">Play again</button>
     </section>
 
-    <!-- ============ PANTALLA 4: RESUMEN FINAL ============ -->
-    <section id="pantalla-resumen" class="pantalla oculta">
-      <h2>¡Sobreviviste el día!</h2>
-      <p id="calificacion" class="calificacion"></p>
-      <ul id="lista-resumen" class="lista-resumen"></ul>
-      <button id="btn-reiniciar-resumen" class="btn btn-principal">Jugar de nuevo</button>
+    <!-- ============ SCREEN 4: FINAL SUMMARY ============ -->
+    <section id="screen-summary" class="screen hidden">
+      <h2>You made it through the day!</h2>
+      <p id="grade" class="grade"></p>
+      <ul id="summary-list" class="summary-list"></ul>
+      <button id="btn-restart-summary" class="btn btn-primary">Play again</button>
     </section>
 
   </main>
