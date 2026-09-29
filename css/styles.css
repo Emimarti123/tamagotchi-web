@@ -1,15 +1,11 @@
-
-
-
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
-/* ---------- 1. VARIABLES ---------- */
-
+/* ---------- DAY / NIGHT ---------- */
 body.day {
   --bg: linear-gradient(180deg, #bfe6ff 0%, #fff4d6 100%);
   --card: #ffffff;
   --text: #2b2b3a;
-  --muted: #6b6b80;
+  --muted: #5d5d72;
   --stage: #d9f2d0;
   --accent: #ff7a59;
   --border: #2b2b3a;
@@ -25,7 +21,7 @@ body.night {
   --border: #0a0d22;
 }
 
-/* ---------- 2. BASE AND LAYOUT ---------- */
+/* ---------- BASE ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,141 +31,159 @@ body.night {
 body {
   min-height: 100vh;
   background: var(--bg);
+  background-attachment: fixed;
   color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 1.05rem;
   transition: background 1s ease, color 1s ease;
 }
 
-.container {
-  width: 100%;
-  max-width: 480px;
-  background: var(--card);
-  border: 4px solid var(--border);
-  border-radius: 20px;
-  box-shadow: 8px 8px 0 var(--border);
-  padding: 24px;
-  transition: background 1s ease;
+h1,
+h2,
+.btn,
+#clock,
+.time-label,
+.option-name,
+.indicator-name,
+.grade {
+  font-family: "Press Start 2P", monospace;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  line-height: 1.4;
+}
+
+h2 {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  line-height: 1.5;
 }
 
 .screen {
+  width: 100%;
+  max-width: 1100px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 48px 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 32px;
   text-align: center;
   animation: fade-in 0.4s ease;
 }
 
-/* JavaScript adds or removes this class to switch screens */
 .hidden {
   display: none;
 }
 
-h1,
-h2 {
-  font-family: "Press Start 2P", monospace;
-  line-height: 1.4;
-}
-
-h1 {
-  font-size: 1.4rem;
-}
-
-h2 {
-  font-size: 1rem;
-}
-
 .subtitle {
   color: var(--muted);
+  font-size: 1.15rem;
 }
 
-/* ---------- 3. START SCREEN ---------- */
+/* ---------- START SCREEN ---------- */
 #start-form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 40px;
 }
 
 .pet-options {
+  width: 100%;
   border: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 24px;
 }
 
-.pet-options legend,
-.label {
+.pet-options legend {
+  width: 100%;
+  margin-bottom: 20px;
   font-weight: bold;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
 }
 
 .option {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 6px;
-  border: 3px solid var(--border);
-  border-radius: 14px;
+  justify-content: center;
+  gap: 16px;
+  min-height: 320px;
+  padding: 32px 16px;
+  background: var(--card);
+  border: 4px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 var(--border);
   cursor: pointer;
   transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .option:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
-/* Hide the native radio circle; the whole card acts as the button */
 .option input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-/* Selected card: :has() checks if the card contains a checked radio */
 .option:has(input:checked) {
   background: var(--accent);
   color: #fff;
-  transform: translateY(-3px);
+  transform: translateY(-6px);
 }
 
 .option-visual {
-  font-size: 2.5rem;
+  font-size: 6rem;
+  line-height: 1;
 }
 
 .option-visual img {
-  width: 64px;
-  height: 64px;
-  image-rendering: pixelated; /* keeps pixel art sharp when scaled */
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
 .option-name {
-  font-weight: bold;
+  font-size: 1rem;
 }
 
-.option-detail {
-  font-size: 0.75rem;
+.name-row {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 #input-name {
-  padding: 12px;
-  font-size: 1rem;
-  border: 3px solid var(--border);
-  border-radius: 10px;
+  padding: 16px;
+  font-size: 1.1rem;
   text-align: center;
+  border: 4px solid var(--border);
+  border-radius: 12px;
 }
 
 .error {
+  min-height: 1.3em;
   color: #e53935;
   font-weight: bold;
-  min-height: 1.2em; /* reserves space so the layout does not jump */
 }
 
-/* ---------- 4. GAME SCREEN ---------- */
+/* ---------- GAME SCREEN ---------- */
 .top-bar {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -178,12 +192,11 @@ h2 {
 
 .difficulty-tag {
   display: inline-block;
-  margin-top: 6px;
-  padding: 2px 10px;
+  margin-top: 10px;
+  padding: 4px 14px;
   border-radius: 999px;
   background: var(--accent);
   color: #fff;
-  font-size: 0.75rem;
   font-weight: bold;
 }
 
@@ -191,11 +204,16 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 8px;
+}
+
+.time-label {
+  font-size: 0.7rem;
+  color: var(--muted);
 }
 
 #clock {
-  font-family: "Press Start 2P", monospace;
-  font-size: 1.2rem;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
 }
 
 #time-left {
@@ -203,8 +221,10 @@ h2 {
 }
 
 .day-progress {
-  height: 8px;
-  background: var(--stage);
+  width: 100%;
+  height: 12px;
+  background: var(--card);
+  border: 3px solid var(--border);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -217,54 +237,77 @@ h2 {
 }
 
 .stage {
-  height: 200px;
+  width: 100%;
+  min-height: 340px;
+  padding: 32px;
   background: var(--stage);
-  border: 3px solid var(--border);
-  border-radius: 16px;
+  border: 4px solid var(--border);
+  border-radius: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 24px;
   transition: background 1s ease;
 }
 
 .pet {
-  font-size: 5rem;
-  animation: bounce 1.2s ease-in-out infinite;
+  font-size: 8rem;
+  line-height: 1;
+  animation: bounce 1.4s ease-in-out infinite;
 }
 
 .pet img {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
   image-rendering: pixelated;
 }
 
-/* The pet needs attention: shakes instead of bouncing */
 .pet.alert {
   animation: shake 0.5s ease-in-out infinite;
 }
 
 .message {
-  min-height: 2.5em;
+  min-height: 1.6em;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
 .indicators {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .indicator {
   display: grid;
-  grid-template-columns: 110px 1fr 45px;
-  align-items: center;
-  gap: 8px;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name value"
+    "bar  bar";
+  gap: 10px;
+  padding: 18px;
+  background: var(--card);
+  border: 3px solid var(--border);
+  border-radius: 14px;
   text-align: left;
-  font-size: 0.9rem;
+}
+
+.indicator-name {
+  grid-area: name;
+  font-size: 0.75rem;
+}
+
+.indicator-value {
+  grid-area: value;
+  font-weight: bold;
 }
 
 .bar {
-  height: 14px;
+  grid-area: bar;
+  height: 18px;
   background: var(--stage);
   border: 2px solid var(--border);
   border-radius: 999px;
@@ -278,7 +321,6 @@ h2 {
   transition: width 0.4s ease, background 0.4s ease;
 }
 
-/* JavaScript adds these classes depending on the value */
 .bar-fill.warning {
   background: #ffc107;
 }
@@ -287,39 +329,33 @@ h2 {
   background: #e53935;
 }
 
-.indicator-value {
-  text-align: right;
-  font-weight: bold;
-}
-
-/* ---------- 5. BUTTONS ---------- */
+/* ---------- BUTTONS ---------- */
 .actions {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 24px;
 }
 
 .btn {
-  padding: 12px 8px;
-  font-size: 0.95rem;
-  font-weight: bold;
+  padding: 20px 12px;
+  font-size: 0.85rem;
   color: var(--text);
   background: var(--card);
-  border: 3px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 3px 3px 0 var(--border);
+  border: 4px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--border);
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .btn:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: 5px 5px 0 var(--border);
 }
 
-/* "Pressed" effect */
 .btn:active {
-  transform: translate(3px, 3px);
+  transform: translate(4px, 4px);
   box-shadow: 0 0 0 var(--border);
 }
 
@@ -328,48 +364,52 @@ h2 {
   color: #fff;
 }
 
-.btn-secondary {
-  background: transparent;
-  box-shadow: none;
-  font-size: 0.85rem;
-}
-
-/* A button pulses when the pet is asking for that action */
 .btn.attention {
-  animation: pulse 0.8s ease-in-out infinite;
   background: var(--accent);
   color: #fff;
+  animation: pulse 0.8s ease-in-out infinite;
 }
 
-/* ---------- 6. GAME OVER AND SUMMARY ---------- */
+/* ---------- GAME OVER AND SUMMARY ---------- */
+#screen-gameover,
+#screen-summary {
+  justify-content: center;
+}
+
 .pet.ghost {
-  animation: float 2s ease-in-out infinite;
   opacity: 0.85;
+  animation: float 2s ease-in-out infinite;
 }
 
 .grade {
-  font-family: "Press Start 2P", monospace;
-  font-size: 2.5rem;
+  font-size: 4rem;
   color: var(--accent);
 }
 
 .summary-list {
+  width: 100%;
+  max-width: 560px;
   list-style: none;
-  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 
 .summary-list li {
   display: flex;
   justify-content: space-between;
-  padding: 8px 12px;
-  background: var(--stage);
-  border-radius: 8px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 3px solid var(--border);
+  border-radius: 10px;
 }
 
-/* ---------- 7. ANIMATIONS ---------- */
+#btn-restart-gameover,
+#btn-restart-summary {
+  min-width: 260px;
+}
+
+/* ---------- ANIMATIONS ---------- */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -377,41 +417,46 @@ h2 {
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-12px); }
+  50%      { transform: translateY(-14px); }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0) rotate(0); }
-  25%      { transform: translateX(-6px) rotate(-5deg); }
-  75%      { transform: translateX(6px) rotate(5deg); }
+  25%      { transform: translateX(-8px) rotate(-6deg); }
+  75%      { transform: translateX(8px) rotate(6deg); }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-15px); }
+  50%      { transform: translateY(-18px); }
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.07); }
+  50%      { transform: scale(1.06); }
 }
 
-/* ---------- 8. RESPONSIVE (phones) ---------- */
-@media (max-width: 420px) {
-  .container {
-    padding: 16px;
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 760px) {
+  .screen {
+    padding: 28px 16px;
+    gap: 24px;
   }
 
-  h1 {
-    font-size: 1.1rem;
+  .pet-options,
+  .indicators {
+    grid-template-columns: 1fr;
   }
 
-  .indicator {
-    grid-template-columns: 90px 1fr 40px;
-    font-size: 0.8rem;
+  .option {
+    min-height: auto;
+  }
+
+  .actions {
+    gap: 12px;
   }
 
   .btn {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
   }
 }

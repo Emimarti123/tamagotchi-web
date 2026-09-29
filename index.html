@@ -3,121 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pibble babysitter</title>
+  <title>Web Mascot</title>
   <link rel="stylesheet" href="css/styles.css">
- 
   <script src="js/app.js" defer></script>
 </head>
 <body class="day">
 
-  <main class="container">
+  <!-- SCREEN 1: START -->
+  <section id="screen-start" class="screen">
+    <h1>Web Mascot</h1>
+    <p class="subtitle">Choose your mascot and take care of it for a full day.</p>
 
-    <!-- ============ SCREEN 1: MASCOT CREATION ============ -->
-    <section id="screen-start" class="screen">
-      <h1>Pibble babysitter</h1>
-      <p class="subtitle">Choose your virtual pibble and take care of it for a full day.</p>
+    <form id="start-form">
+      <fieldset class="pet-options">
+        <legend>Choose your mascot</legend>
 
-      <form id="start-form">
-        <fieldset class="pet-options">
-          <legend>1. Choose your pibble</legend>
+        <label class="option">
+          <input type="radio" name="difficulty" value="easy">
+          <span class="option-visual" data-pet="easy">🐣</span>
+          <span class="option-name">Easy</span>
+          <span class="option-detail">Eats every 6 h</span>
+        </label>
 
-          <label class="option">
-            <input type="radio" name="difficulty" value="easy">
-            <span class="option-visual" data-pet="easy">🐣</span>
-            <span class="option-name">Easy</span>
-            <span class="option-detail">Eats every 6 h</span>
-          </label>
+        <label class="option">
+          <input type="radio" name="difficulty" value="medium">
+          <span class="option-visual" data-pet="medium">🐱</span>
+          <span class="option-name">Medium</span>
+          <span class="option-detail">Eats every 4 h</span>
+        </label>
 
-          <label class="option">
-            <input type="radio" name="difficulty" value="medium">
-            <span class="option-visual" data-pet="medium">🐱</span>
-            <span class="option-name">Medium</span>
-            <span class="option-detail">Eats every 4 h</span>
-          </label>
+        <label class="option">
+          <input type="radio" name="difficulty" value="hard">
+          <span class="option-visual" data-pet="hard">🐲</span>
+          <span class="option-name">Hard</span>
+          <span class="option-detail">Eats every 3 h</span>
+        </label>
+      </fieldset>
 
-          <label class="option">
-            <input type="radio" name="difficulty" value="hard">
-            <span class="option-visual" data-pet="hard">🐲</span>
-            <span class="option-name">Hard</span>
-            <span class="option-detail">Eats every 3 h</span>
-          </label>
-        </fieldset>
-
-        <label for="input-name" class="label">2. Give it a name</label>
+      <div class="name-row">
+        <label for="input-name" class="label">Name your mascot</label>
         <input type="text" id="input-name" maxlength="15" placeholder="e.g. Pixel" autocomplete="off">
-
         <p id="start-error" class="error"></p>
         <button type="submit" class="btn btn-primary">Start</button>
-      </form>
-    </section>
-
-    <!-- ============ SCREEN 2: GAME ============ -->
-    <section id="screen-game" class="screen hidden">
-      <header class="top-bar">
-        <div>
-          <h2 id="pet-name">Name</h2>
-          <span id="pet-difficulty" class="difficulty-tag">Easy</span>
-        </div>
-        <div class="clock-container">
-          <span id="time-icon">☀️</span>
-          <span id="clock">08:00</span>
-          <small id="time-left">24 h left</small>
-        </div>
-      </header>
-
-      <div class="day-progress">
-        <div id="day-bar" class="day-progress-fill"></div>
       </div>
+    </form>
+  </section>
 
-      <div id="stage" class="stage">
-        <div id="pet-visual" class="pet">🐣</div>
+  <!-- SCREEN 2: GAME -->
+  <section id="screen-game" class="screen hidden">
+    <header class="top-bar">
+      <div class="pet-info">
+        <h2 id="pet-name">Name</h2>
+        <span id="pet-difficulty" class="difficulty-tag">Easy</span>
       </div>
-
-      <p id="message" class="message">Hi, im your pibble, Please take good care of me.</p>
-
-      <div class="indicators">
-        <div class="indicator">
-          <span class="indicator-name">🍖 Hunger</span>
-          <div class="bar"><div id="bar-hunger" class="bar-fill"></div></div>
-          <span id="value-hunger" class="indicator-value">0%</span>
-        </div>
-        <div class="indicator">
-          <span class="indicator-name">🎾 Fun</span>
-          <div class="bar"><div id="bar-fun" class="bar-fill"></div></div>
-          <span id="value-fun" class="indicator-value">100%</span>
-        </div>
-        <div class="indicator">
-          <span class="indicator-name">🧼 Hygiene</span>
-          <div class="bar"><div id="bar-hygiene" class="bar-fill"></div></div>
-          <span id="value-hygiene" class="indicator-value">100%</span>
-        </div>
+      <div class="clock-container">
+        <span id="time-label" class="time-label">DAY</span>
+        <span id="clock">08:00</span>
+        <small id="time-left">24 h 0 min left</small>
       </div>
+    </header>
 
-      <div class="actions">
-        <button id="btn-feed" class="btn">🍖 Feed</button>
-        <button id="btn-play" class="btn">🎾 Play</button>
-        <button id="btn-bath" class="btn">🚽 Bathroom</button>
+    <div class="day-progress">
+      <div id="day-bar" class="day-progress-fill"></div>
+    </div>
+
+    <div class="stage">
+      <div id="pet-visual" class="pet">🐣</div>
+      <p id="message" class="message">Hi! Take good care of me.</p>
+    </div>
+
+    <div class="indicators">
+      <div class="indicator">
+        <span class="indicator-name">Hunger</span>
+        <div class="bar"><div id="bar-hunger" class="bar-fill"></div></div>
+        <span id="value-hunger" class="indicator-value">0%</span>
       </div>
-      <button id="btn-pause" class="btn btn-secondary">⏸ Pause</button>
-    </section>
+      <div class="indicator">
+        <span class="indicator-name">Fun</span>
+        <div class="bar"><div id="bar-fun" class="bar-fill"></div></div>
+        <span id="value-fun" class="indicator-value">100%</span>
+      </div>
+      <div class="indicator">
+        <span class="indicator-name">Hygiene</span>
+        <div class="bar"><div id="bar-hygiene" class="bar-fill"></div></div>
+        <span id="value-hygiene" class="indicator-value">100%</span>
+      </div>
+    </div>
 
-    <!-- ============ SCREEN 3: GAME OVER ============ -->
-    <section id="screen-gameover" class="screen hidden">
-      <div class="pet ghost">👻</div>
-      <h2>Game Over</h2>
-      <p id="gameover-reason" class="message"></p>
-      <button id="btn-restart-gameover" class="btn btn-primary">Play again</button>
-    </section>
+    <div class="actions">
+      <button id="btn-feed" class="btn">Feed</button>
+      <button id="btn-play" class="btn">Play</button>
+      <button id="btn-bath" class="btn">Bathroom</button>
+    </div>
+  </section>
 
-    <!-- ============ SCREEN 4: FINAL SUMMARY ============ -->
-    <section id="screen-summary" class="screen hidden">
-      <h2>You made it through the day!</h2>
-      <p id="grade" class="grade"></p>
-      <ul id="summary-list" class="summary-list"></ul>
-      <button id="btn-restart-summary" class="btn btn-primary">Play again</button>
-    </section>
+  <!-- SCREEN 3: GAME OVER -->
+  <section id="screen-gameover" class="screen hidden">
+    <div id="gameover-pet" class="pet ghost">👻</div>
+    <h2>Game Over</h2>
+    <p id="gameover-reason" class="message"></p>
+    <button id="btn-restart-gameover" class="btn btn-primary">Play again</button>
+  </section>
 
-  </main>
+  <!-- SCREEN 4: SUMMARY -->
+  <section id="screen-summary" class="screen hidden">
+    <h2>You made it through the day!</h2>
+    <p id="grade" class="grade"></p>
+    <ul id="summary-list" class="summary-list"></ul>
+    <button id="btn-restart-summary" class="btn btn-primary">Play again</button>
+  </section>
 
 </body>
 </html>
