@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamagotchi Web</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="js/app.js" defer></script>
+</head>
+<body class="dia">
+
+  <main class="contenedor">
+
+    <!--  PANTALLA 1: CREACIÓN DE LA MASCOTA  -->
+    <section id="pantalla-inicio" class="pantalla">
+      <h1>Web Mascot</h1>
+      <p class="subtitulo">Choose your virtual mascot and take care of it for a full day.</p>
+
+      <form id="form-inicio">
+        <fieldset class="opciones-mascota">
+          <legend>1. Choose your mascot</legend>
+
+          <label class="opcion">
+            <input type="radio" name="dificultad" value="facil">
+            <span class="opcion-visual" data-mascota="facil">🐣</span>
+            <span class="opcion-nombre">Fácil</span>
+            <span class="opcion-detalle">Come cada 6 h</span>
+          </label>
+
+          <label class="opcion">
+            <input type="radio" name="dificultad" value="medio">
+            <span class="opcion-visual" data-mascota="medio">🐱</span>
+            <span class="opcion-nombre">Medio</span>
+            <span class="opcion-detalle">Come cada 4 h</span>
+          </label>
+
+          <label class="opcion">
+            <input type="radio" name="dificultad" value="dificil">
+            <span class="opcion-visual" data-mascota="dificil">🐲</span>
+            <span class="opcion-nombre">Difícil</span>
+            <span class="opcion-detalle">Come cada 3 h</span>
+          </label>
+        </fieldset>
+
+        <label for="input-nombre" class="etiqueta">2. Ponle un nombre</label>
+        <input type="text" id="input-nombre" maxlength="15" placeholder="Ej. Pixel" autocomplete="off">
+
+        <p id="error-inicio" class="error"></p>
+        <button type="submit" class="btn btn-principal">Comenzar</button>
+      </form>
+    </section>
+
+    <!-- ============ PANTALLA 2: JUEGO ============ -->
+    <section id="pantalla-juego" class="pantalla oculta">
+      <header class="barra-superior">
+        <div>
+          <h2 id="nombre-mascota">Nombre</h2>
+          <span id="dificultad-mascota" class="etiqueta-dificultad">Fácil</span>
+        </div>
+        <div class="reloj-contenedor">
+          <span id="icono-momento">☀️</span>
+          <span id="reloj">08:00</span>
+          <small id="tiempo-restante">Quedan 24 h</small>
+        </div>
+      </header>
+
+      <div class="progreso-dia">
+        <div id="barra-dia" class="progreso-dia-relleno"></div>
+      </div>
+
+      <div id="escenario" class="escenario">
+        <div id="mascota-visual" class="mascota">🐣</div>
+      </div>
+
+      <p id="mensaje" class="mensaje">¡Hola! Cuídame bien.</p>
+
+      <div class="indicadores">
+        <div class="indicador">
+          <span class="indicador-nombre">🍖 Hambre</span>
+          <div class="barra"><div id="barra-hambre" class="barra-relleno"></div></div>
+          <span id="valor-hambre" class="indicador-valor">0%</span>
+        </div>
+        <div class="indicador">
+          <span class="indicador-nombre">🎾 Diversión</span>
+          <div class="barra"><div id="barra-diversion" class="barra-relleno"></div></div>
+          <span id="valor-diversion" class="indicador-valor">100%</span>
+        </div>
+        <div class="indicador">
+          <span class="indicador-nombre">🧼 Higiene</span>
+          <div class="barra"><div id="barra-higiene" class="barra-relleno"></div></div>
+          <span id="valor-higiene" class="indicador-valor">100%</span>
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button id="btn-alimentar" class="btn">🍖 Alimentar</button>
+        <button id="btn-jugar" class="btn">🎾 Jugar</button>
+        <button id="btn-bano" class="btn">🚽 Baño</button>
+      </div>
+      <button id="btn-pausa" class="btn btn-secundario">⏸ Pausar</button>
+    </section>
+
+    <!-- ============ PANTALLA 3: GAME OVER ============ -->
+    <section id="pantalla-gameover" class="pantalla oculta">
+      <div class="mascota fantasma">👻</div>
+      <h2>Game Over</h2>
+      <p id="motivo-gameover" class="mensaje"></p>
+      <button id="btn-reiniciar-gameover" class="btn btn-principal">Jugar de nuevo</button>
+    </section>
+
+    <!-- ============ PANTALLA 4: RESUMEN FINAL ============ -->
+    <section id="pantalla-resumen" class="pantalla oculta">
+      <h2>¡Sobreviviste el día!</h2>
+      <p id="calificacion" class="calificacion"></p>
+      <ul id="lista-resumen" class="lista-resumen"></ul>
+      <button id="btn-reiniciar-resumen" class="btn btn-principal">Jugar de nuevo</button>
+    </section>
+
+  </main>
+
+</body>
+</html>
