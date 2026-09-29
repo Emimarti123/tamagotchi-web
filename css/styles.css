@@ -1,0 +1,417 @@
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* ---------- 1. VARIABLES ---------- */
+
+body.day {
+  --bg: linear-gradient(180deg, #bfe6ff 0%, #fff4d6 100%);
+  --card: #ffffff;
+  --text: #2b2b3a;
+  --muted: #6b6b80;
+  --stage: #d9f2d0;
+  --accent: #ff7a59;
+  --border: #2b2b3a;
+}
+
+body.night {
+  --bg: linear-gradient(180deg, #0f1535 0%, #2a2250 100%);
+  --card: #1f2444;
+  --text: #f1f1ff;
+  --muted: #a9acd6;
+  --stage: #2d3566;
+  --accent: #ffb347;
+  --border: #0a0d22;
+}
+
+/* ---------- 2. BASE AND LAYOUT ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  transition: background 1s ease, color 1s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card);
+  border: 4px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 var(--border);
+  padding: 24px;
+  transition: background 1s ease;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  animation: fade-in 0.4s ease;
+}
+
+/* JavaScript adds or removes this class to switch screens */
+.hidden {
+  display: none;
+}
+
+h1,
+h2 {
+  font-family: "Press Start 2P", monospace;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+.subtitle {
+  color: var(--muted);
+}
+
+/* ---------- 3. START SCREEN ---------- */
+#start-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pet-options {
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.pet-options legend,
+.label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 6px;
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.option:hover {
+  transform: translateY(-3px);
+}
+
+/* Hide the native radio circle; the whole card acts as the button */
+.option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Selected card: :has() checks if the card contains a checked radio */
+.option:has(input:checked) {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.option-visual {
+  font-size: 2.5rem;
+}
+
+.option-visual img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated; /* keeps pixel art sharp when scaled */
+}
+
+.option-name {
+  font-weight: bold;
+}
+
+.option-detail {
+  font-size: 0.75rem;
+}
+
+#input-name {
+  padding: 12px;
+  font-size: 1rem;
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.error {
+  color: #e53935;
+  font-weight: bold;
+  min-height: 1.2em; /* reserves space so the layout does not jump */
+}
+
+/* ---------- 4. GAME SCREEN ---------- */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.difficulty-tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#clock {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.2rem;
+}
+
+#time-left {
+  color: var(--muted);
+}
+
+.day-progress {
+  height: 8px;
+  background: var(--stage);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.day-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.5s linear;
+}
+
+.stage {
+  height: 200px;
+  background: var(--stage);
+  border: 3px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 1s ease;
+}
+
+.pet {
+  font-size: 5rem;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.pet img {
+  width: 140px;
+  height: 140px;
+  image-rendering: pixelated;
+}
+
+/* The pet needs attention: shakes instead of bouncing */
+.pet.alert {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.message {
+  min-height: 2.5em;
+  font-weight: bold;
+}
+
+.indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.indicator {
+  display: grid;
+  grid-template-columns: 110px 1fr 45px;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.bar {
+  height: 14px;
+  background: var(--stage);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #4caf50;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+/* JavaScript adds these classes depending on the value */
+.bar-fill.warning {
+  background: #ffc107;
+}
+
+.bar-fill.danger {
+  background: #e53935;
+}
+
+.indicator-value {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* ---------- 5. BUTTONS ---------- */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.btn {
+  padding: 12px 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text);
+  background: var(--card);
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--border);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+/* "Pressed" effect */
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--border);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+
+/* A button pulses when the pet is asking for that action */
+.btn.attention {
+  animation: pulse 0.8s ease-in-out infinite;
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- 6. GAME OVER AND SUMMARY ---------- */
+.pet.ghost {
+  animation: float 2s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+.grade {
+  font-family: "Press Start 2P", monospace;
+  font-size: 2.5rem;
+  color: var(--accent);
+}
+
+.summary-list {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--stage);
+  border-radius: 8px;
+}
+
+/* ---------- 7. ANIMATIONS ---------- */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25%      { transform: translateX(-6px) rotate(-5deg); }
+  75%      { transform: translateX(6px) rotate(5deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.07); }
+}
+
+/* ---------- 8. RESPONSIVE (phones) ---------- */
+@media (max-width: 420px) {
+  .container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+  }
+
+  .indicator {
+    grid-template-columns: 90px 1fr 40px;
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+  }
+}
